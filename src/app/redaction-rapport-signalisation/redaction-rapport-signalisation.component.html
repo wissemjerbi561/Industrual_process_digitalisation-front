@@ -1,0 +1,148 @@
+<div class="modal-overlay" *ngIf="isModalOpen">
+    <div class="modal">
+      <!-- En-tête du modal -->
+      <div class="modal-header">
+        <h2>Rédaction du Rapport de Signalisation</h2>
+        <button class="close-btn" (click)="closeModal()">✖</button>
+      </div>
+  
+      <!-- Contenu du modal -->
+      <div class="modal-content">
+        <div class="rapport-container">
+          <!-- Section: Identifier le problème -->
+          <div class="section">
+            <h3>Identifier le problème</h3>
+            <label>Identifié par :
+              <select [(ngModel)]="rapport.identifiePar">
+                <option value="WFSI">WFSI</option>
+                <!-- Ajouter d'autres options si nécessaire -->
+              </select>
+            </label>
+  
+            <label>Code Cable :
+              <input type="text" [(ngModel)]="rapport.codeCable" />
+            </label>
+  
+            <label>Qt Totale :
+              <input type="number" [(ngModel)]="rapport.qtTotale" />
+            </label>
+  
+            <label>Date d'ouverture :
+              <input type="date" [(ngModel)]="rapport.dateOuverture" />
+            </label>
+          </div>
+  
+          <!-- Section: Code défaut -->
+          <div class="section">
+            <h3>Code Défaut</h3>
+            <label>Code défaut :
+              <select [(ngModel)]="rapport.codeDefaut">
+                <option value="FL40">FL40</option>
+                <!-- Ajouter d'autres options -->
+              </select>
+            </label>
+  
+            <label>Unité :
+              <select [(ngModel)]="rapport.unite">
+                <option value="Unité 2">Unité 2</option>
+                <!-- Ajouter d'autres options -->
+              </select>
+            </label>
+  
+            <label>Opérateur :
+              <input type="text" [(ngModel)]="rapport.operateur" />
+            </label>
+  
+            <label>Description NC :
+              <textarea [(ngModel)]="rapport.descriptionNC"></textarea>
+            </label>
+          </div>
+  
+          <!-- Section: Analyse -->
+          <div class="section">
+            <h3>Analyse des Causes</h3>
+            <label>Pilote :
+              <select [(ngModel)]="rapport.pilote">
+                <option value="Sami Louhichi">Sami Louhichi</option>
+                <!-- Ajouter d'autres options -->
+              </select>
+            </label>
+  
+            <label>Equipe :
+              <input type="text" [(ngModel)]="rapport.equipe" />
+            </label>
+  
+            <label>Analyse des causes :
+              <textarea [(ngModel)]="rapport.analyseCauses"></textarea>
+            </label>
+  
+            <label>Codes Similaires :
+              <select [(ngModel)]="rapport.codesSimilaires">
+                <option value="Générique">Générique</option>
+                <!-- Ajouter d'autres options -->
+              </select>
+            </label>
+          </div>
+  
+          <!-- Section: Plan d'Action -->
+          <div class="section">
+            <h3>Plan d'Action</h3>
+            <table class="action-table">
+              <thead>
+                <tr>
+                  <th>N° Action</th>
+                  <th>Action</th>
+                  <th>Délai</th>
+                  <th>Responsable</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td><input type="text" [(ngModel)]="rapport.action1" /></td>
+                  <td><input type="date" [(ngModel)]="rapport.delai1" /></td>
+                  <td><input type="text" [(ngModel)]="rapport.responsable1" /></td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td><input type="text" [(ngModel)]="rapport.action2" /></td>
+                  <td><input type="date" [(ngModel)]="rapport.delai2" /></td>
+                  <td><input type="text" [(ngModel)]="rapport.responsable2" /></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+  
+          <!-- Section: Diffusion -->
+          <div class="section">
+            <h3>Diffusion et Clôture</h3>
+            <label>Diffuser à :
+              <select [(ngModel)]="rapport.diffuseA">
+                <option value="Choisir">Choisir</option>
+                <!-- Ajouter d'autres options -->
+              </select>
+            </label>
+  
+            <label>Lien :
+              <input type="text" [(ngModel)]="rapport.lien" />
+            </label>
+  
+            <label>Date de réponse :
+              <input type="date" [(ngModel)]="rapport.dateReponse" />
+            </label>
+  
+            <label>Date de clôture :
+              <input type="date" [(ngModel)]="rapport.dateCloture" />
+            </label>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Pied de page du modal -->
+      <div class="modal-footer">
+        <button class="save-btn" (click)="saveRapport()">Enregistrer</button>
+        <button class="cancel-btn" (click)="closeModal()">Annuler</button>
+      </div>
+    </div>
+  </div>
+  

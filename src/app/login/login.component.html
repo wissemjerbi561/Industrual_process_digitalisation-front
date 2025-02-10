@@ -1,0 +1,49 @@
+<div class="modal-overlay" *ngIf="isModalOpen">
+    <div class="modal">
+      <!-- En-tête du modal -->
+      <div class="modal-header">
+        <h2>Connexion</h2>
+        <button class="close-btn" (click)="closeModal()">✖</button>
+      </div>
+  
+      <!-- Contenu du modal -->
+      <div class="modal-content">
+        <form (ngSubmit)="onLogin()">
+          <div class="form-group">
+            <label for="username">Nom d'utilisateur</label>
+            <input
+              type="text"
+              id="username"
+              [(ngModel)]="username"
+              name="username"
+              class="form-control"
+              required
+            />
+          </div>
+  
+          <div class="form-group">
+            <label for="password">Mot de passe</label>
+            <input
+              type="password"
+              id="password"
+              [(ngModel)]="password"
+              name="password"
+              class="form-control"
+              required
+            />
+          </div>
+  
+          <div *ngIf="errorMessage" class="error-message">
+            {{ errorMessage }}
+          </div>
+        </form>
+      </div>
+  
+      <!-- Pied de page du modal -->
+      <div class="modal-footer">
+        <button class="btn btn-primary" (click)="onLogin()">Se connecter</button>
+        <button class="cancel-btn" (click)="closeModal()">Annuler</button>
+      </div>
+    </div>
+  </div>
+  

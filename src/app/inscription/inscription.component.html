@@ -1,0 +1,53 @@
+<div class="modal-overlay" *ngIf="isModalOpen">
+    <div class="modal">
+      <!-- En-tête du modal -->
+      <div class="modal-header">
+        <h2>Formulaire d'inscription</h2>
+        <button class="close-btn" (click)="closeModal()">✖</button>
+      </div>
+  
+      <!-- Contenu du modal -->
+      <div class="modal-content">
+        <div class="signup-form">
+          <form (ngSubmit)="onSubmit()">
+            <div>
+              <label for="username">Nom d'utilisateur :</label>
+              <input
+                type="text"
+                id="username"
+                [(ngModel)]="user.username"
+                name="username"
+                required
+              />
+            </div>
+  
+            <div>
+              <label for="password">Mot de passe :</label>
+              <input
+                type="password"
+                id="password"
+                [(ngModel)]="user.password"
+                name="password"
+                required
+              />
+            </div>
+  
+            <button type="submit">S'inscrire</button>
+          </form>
+  
+          <div *ngIf="responseMessage" class="success">
+            {{ responseMessage }}
+          </div>
+          <div *ngIf="errorMessage" class="error">
+            {{ errorMessage }}
+          </div>
+        </div>
+      </div>
+  
+      <!-- Pied de page -->
+      <div class="modal-footer">
+        <button class="cancel-btn" (click)="closeModal()">Annuler</button>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,124 @@
+<div class="modal-overlay" *ngIf="isModalOpen">
+    <div class="modal">
+      <!-- En-tête du modal -->
+      <div class="modal-header">
+        <h2>Rédaction du Rapport</h2>
+        <button class="close-btn" (click)="closeModal()">✖</button>
+      </div>
+  
+      <!-- Contenu du modal -->
+      <div class="modal-content">
+        <div class="rapport-container">
+          <h3>Identifier le problème et les différents acteurs</h3>
+          <div class="section">
+            <div class="row">
+              <label>Identifié par</label>
+              <select>
+                <option>ESAM</option>
+              </select>
+            </div>
+            <div class="row">
+              <label>Code Cable</label>
+              <select>
+                <option>ATS4</option>
+              </select>
+            </div>
+            <div class="row">
+              <label>Qt Totale</label>
+              <input type="text" value="60" />
+            </div>
+            <div class="row">
+              <label>Date d'ouverture</label>
+              <input type="date" value="2024-07-18" />
+            </div>
+          </div>
+  
+          <div class="section">
+            <div class="row">
+              <label>N° ordre</label>
+              <input type="text" value="9345" />
+            </div>
+            <div class="row">
+              <label>Qt échantillon</label>
+              <input type="text" value="15" />
+            </div>
+            <div class="row">
+              <label>Date de réclamation</label>
+              <input type="date" value="2024-07-17" />
+            </div>
+          </div>
+  
+          <h3>1 - Construire l'équipe</h3>
+          <div class="section">
+            <div class="row">
+              <label>Pilote</label>
+              <select>
+                <option>Med Amine Mnasser</option>
+              </select>
+            </div>
+            <div class="row">
+              <label>Équipe</label>
+              <textarea>Chiheb Derouiche; Monia Trabelsi; Sami Klai; Sami Kraiem; Zouheir Taalouch</textarea>
+            </div>
+          </div>
+  
+          <h3>2 - Décrire le problème</h3>
+          <div class="section">
+            <div class="row">
+              <label>Description NC</label>
+              <textarea>
+  Habillage mal exécutées des noeud et lors de la finition / Tube Calza AUTOVV courte
+              </textarea>
+            </div>
+            <div class="row">
+              <label>Codes défauts</label>
+              <select>
+                <option>HA04</option>
+              </select>
+              <select>
+                <option>TU03</option>
+              </select>
+            </div>
+            <div class="row">
+              <label>Lien</label>
+              <input type="text" value="00\Qualité\TRAITEMENT DES NON CONFORMITÉS\GD\ESAM\ATS4" />
+            </div>
+          </div>
+  
+          <h3>3 - Action immédiate</h3>
+          <div class="section">
+            <div class="row">
+              <label>Responsable</label>
+              <select>
+                <option>Med Amine Mnasser</option>
+              </select>
+            </div>
+            <div class="row">
+              <label>Réalisé</label>
+              <input type="checkbox" checked />
+            </div>
+            <div class="row">
+              <label>Production en cours</label>
+              <input type="text" value="0" />
+            </div>
+            <div class="row">
+              <label>Codes Similaires</label>
+              <select>
+                <option>ATS2</option>
+              </select>
+              <select>
+                <option>ATS1</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Pied de page du modal -->
+      <div class="modal-footer">
+        <button class="save-btn" (click)="saveRapport()">Enregistrer</button>
+        <button class="cancel-btn" (click)="closeModal()">Annuler</button>
+      </div>
+    </div>
+  </div>
+  

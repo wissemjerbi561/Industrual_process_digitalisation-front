@@ -1,0 +1,168 @@
+<div class="modal-overlay" *ngIf="isModalOpen">
+    <div class="modal">
+      <!-- En-tête du modal -->
+      <div class="modal-header">
+        <h2>Rapport d'Audit</h2>
+        <button class="close-btn" (click)="closeModal()">✖</button>
+      </div>
+  
+      <!-- Contenu du modal -->
+      <div class="modal-content">
+        <div class="rapport-container">
+          <!-- Section: Informations générales -->
+          <div class="row">
+            <div>
+              <label>N° de rapport :</label>
+              <input type="text" [(ngModel)]="rapportAudit.numeroRapport" readonly />
+            </div>
+            <div>
+              <label>Unité :</label>
+              <select [(ngModel)]="rapportAudit.unite">
+                <option value="LG">LG</option>
+                <option value="Unité 2">Unité 2</option>
+                <option value="Unité 3">Unité 3</option>
+                <option value="Unité 4">Unité 4</option>
+              </select>
+            </div>
+          </div>
+  
+          <div class="row">
+            <div>
+              <label>Origine :</label>
+              <select [(ngModel)]="rapportAudit.origine">
+                <option value="Interne">Interne</option>
+                <option value="Externe">Externe</option>
+              </select>
+            </div>
+            <div>
+              <label>Date d'ouverture :</label>
+              <input type="date" [(ngModel)]="rapportAudit.dateOuverture" />
+            </div>
+            <div>
+              <label>Type :</label>
+              <select [(ngModel)]="rapportAudit.type">
+                <option value="Procédure">Procédure</option>
+                <option value="Process">Process</option>
+              </select>
+            </div>
+            <div>
+              <label>Date de réclamation :</label>
+              <input type="date" [(ngModel)]="rapportAudit.dateReclamation" />
+            </div>
+          </div>
+  
+          <div class="row">
+            <div>
+              <label>Identifié par :</label>
+              <select [(ngModel)]="rapportAudit.identifiePar">
+                <option value="TÜV Rheinland">TÜV Rheinland</option>
+                <option value="Option 2">Option 2</option>
+              </select>
+            </div>
+            <div>
+              <label>Date de Production :</label>
+              <input type="date" [(ngModel)]="rapportAudit.dateProduction" />
+            </div>
+            <div>
+              <label>Code Cable :</label>
+              <input type="text" [(ngModel)]="rapportAudit.codeCable" />
+            </div>
+            <div>
+              <label>N° d'ordre :</label>
+              <input type="number" [(ngModel)]="rapportAudit.numeroOrdre" />
+            </div>
+          </div>
+  
+          <div class="row">
+            <div>
+              <label>Opérateur :</label>
+              <input type="text" [(ngModel)]="rapportAudit.operateur" />
+            </div>
+            <div>
+              <label>Qt totale :</label>
+              <input type="number" [(ngModel)]="rapportAudit.qtTotale" />
+            </div>
+            <div>
+              <label>Qt échantillon :</label>
+              <input type="number" [(ngModel)]="rapportAudit.qtEchantillon" />
+            </div>
+            <div>
+              <label>Qt NC :</label>
+              <input type="number" [(ngModel)]="rapportAudit.qtNC" />
+            </div>
+          </div>
+  
+          <!-- Section: Défaut -->
+          <div class="row">
+            <div>
+              <label>Défaut N°1 :</label>
+              <select [(ngModel)]="rapportAudit.defaut">
+                <option value="PRD01">PRD01</option>
+                <option value="Option 2">Option 2</option>
+              </select>
+            </div>
+            <div>
+              <label>Description :</label>
+              <textarea [(ngModel)]="rapportAudit.description"></textarea>
+            </div>
+            <div>
+              <label>Codes similaires :</label>
+              <select [(ngModel)]="rapportAudit.codesSimilaires">
+                <option value="Option 1">Option 1</option>
+                <option value="Option 2">Option 2</option>
+              </select>
+            </div>
+          </div>
+  
+          <!-- Section: Action immédiate -->
+          <div class="row">
+            <div>
+              <label>Action Immédiate :</label>
+              <input type="text" [(ngModel)]="rapportAudit.actionImmediate" />
+            </div>
+            <div>
+              <label>Responsable :</label>
+              <select [(ngModel)]="rapportAudit.responsable">
+                <option value="Soufien Hammami">Soufien Hammami</option>
+                <option value="Option 2">Option 2</option>
+              </select>
+            </div>
+            <div>
+              <label>Réalisé :</label>
+              <input type="checkbox" [(ngModel)]="rapportAudit.realise" />
+            </div>
+          </div>
+  
+          <!-- Section: Responsable -->
+          <div class="row">
+            <div>
+              <label>Pilote :</label>
+              <select [(ngModel)]="rapportAudit.pilote">
+                <option value="Sami Kraiem">Sami Kraiem</option>
+                <option value="Option 2">Option 2</option>
+              </select>
+            </div>
+            <div>
+              <label>Équipe :</label>
+              <textarea [(ngModel)]="rapportAudit.equipe"></textarea>
+            </div>
+          </div>
+  
+          <!-- Section: Lien -->
+          <div class="row">
+            <div>
+              <label>Lien :</label>
+              <input type="text" [(ngModel)]="rapportAudit.lien" />
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Pied de page -->
+      <div class="modal-footer">
+        <button class="save-btn" (click)="saveRapportAudit()">Enregistrer</button>
+        <button class="cancel-btn" (click)="closeModal()">Annuler</button>
+      </div>
+    </div>
+  </div>
+  

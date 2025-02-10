@@ -1,0 +1,220 @@
+<div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <ul class="sidebar-tabs">
+        <li (click)="selectTab('traitementNC')" [class.active]="selectedTab === 'traitementNC'">
+          Traitement des NC
+        </li>
+        <li (click)="selectTab('suiviQualite')" [class.active]="selectedTab === 'suiviQualite'">
+          Suivi Qualité et Satisfaction Clients
+        </li>
+        <li (click)="selectTab('tableauBord')" [class.active]="selectedTab === 'tableauBord'">
+          Tableau de bord / Approbation
+        </li>
+        <li (click)="selectTab('parametrage')" [class.active]="selectedTab === 'parametrage'">
+          Paramétrage
+        </li>
+      </ul>
+    </aside>
+  
+    <!-- Contenu des onglets -->
+    <div *ngIf="selectedTab === 'traitementNC'" class="tab-content">
+      <!-- Navbar pour les sous-onglets -->
+      <nav class="navbar">
+        <ul>
+          <li (click)="selectSubTab('8D')" [class.active]="selectedSubTab === '8D'">8D</li>
+          <li (click)="selectSubTab('reclamationClient')" [class.active]="selectedSubTab === 'reclamationClient'">Réclamation Client</li>
+          <li (click)="selectSubTab('signalisation')" [class.active]="selectedSubTab === 'signalisation'">Signalisation</li>
+          <li (click)="selectSubTab('ncInterne')" [class.active]="selectedSubTab === 'ncInterne'">Non Conformité Interne</li>
+          <li (click)="selectSubTab('audit')" [class.active]="selectedSubTab === 'audit'">Audit</li>
+        </ul>
+      </nav>
+  
+      <!-- Sous-éléments du navbar -->
+      <div class="sub-tab-content">
+        <div *ngIf="selectedSubTab === '8D'" class="module">
+          <h3>8D</h3>
+          <button *ngIf="ouvrirRapport8d" >Ouvrir un rapport 8D</button>
+          <!-- <button (click)="afficherRapport8D()" routerLink="rapport8d" [hidden]="!creerRapport8d">Modifier un rapport 8D</button> -->
+          <button *ngIf="creerRapport8d" (click)="afficherRapport8D()" routerLink="rapport8d">
+            Créer un rapport 8D
+          </button>
+          <button *ngIf="modifierRapport8d" (click)="afficherRapport8D()" routerLink="rapport8d">
+            Modifier un rapport 8D
+          </button>
+          <button *ngIf="supprimerRapport8d" (click)="afficherRapport8D()" routerLink="rapport8d">
+            Supprimer un rapport 8D
+          </button>
+        
+        </div>
+  
+        <div *ngIf="selectedSubTab === 'reclamationClient'" class="module">
+          <h3>Réclamation Client</h3>
+          <button *ngIf="ouvrirRapportNc">Ouvrir un rapport NC</button>
+          <button *ngIf="creerRapportNc" (click)="afficherRapportNC()" routerLink="creation-rapport-nc">Créer un rapport NC</button>
+          <button *ngIf="modifierRapportNc">Modifier un rapport NC</button>
+          <button *ngIf="supprimerRapportNc"(click)="afficherRapportNC()" routerLink="creation-rapport-nc">Supprimer un rapport NC</button>
+        </div>
+  
+        <div *ngIf="selectedSubTab === 'signalisation'" class="module">
+          <h3>Signalisation</h3>
+          <button *ngIf="ouvrirRapportSignalisation">Ouvrir un rapport de Signalisation</button>
+          <button *ngIf="creerRapportSignalisation" (click)="afficherRapportSignalisation()" routerLink="rapportSignalisation">Créer un rapport Signalisation</button>
+          <button *ngIf="modifierRapportSignalisation">Modifier un rapport Signalisation</button>
+          <button *ngIf="supprimerRapportSignalisation" (click)="afficherRapportSignalisation()" routerLink="rapportSignalisation">Supprimer un rapport Signalisation</button>
+        </div>
+  
+        <div *ngIf="selectedSubTab === 'ncInterne'" class="module">
+          <h3>Non Conformité Interne</h3>
+          <button *ngIf="ouvrirRapportInterne">Ouvrir un rapport de NC Interne</button>
+          <button *ngIf="creerRapportNcInterne" (click)="afficherRapportNcInterne()" routerLink="rapportNcInterne">Créer un rapport de NC Interne</button>
+          <button *ngIf="modifierRapportInterne">Modifier un rapport de NC Interne</button>
+          <button *ngIf="supprimerRapportInterne" (click)="afficherRapportNcInterne()" routerLink="rapportNcInterne">Supprimer un rapport de NC Interne</button>
+        </div>
+  
+        <div *ngIf="selectedSubTab === 'audit'" class="module">
+          <h3>Audit</h3>
+          <button *ngIf="ouvrirRapportNcAudit">Ouvrir un rapport de NC Audit</button>
+          <button *ngIf="creerRapportNcAudit"(click)="afficherRapportAudit()" routerLink="rapportAudit">Créer un rapport de NC Audit</button>
+          <button *ngIf="modifierRapportNcAudit">Modifier un rapport de NC Audit</button>
+          <button *ngIf="supprimerRapportNcAudit"(click)="afficherRapportAudit()" routerLink="rapportAudit">Supprimer un rapport de NC Audit</button>
+  <!--         
+          <button (click)="afficherRapport('Audit')" routerLink="rapportAudit">Modifier un rapport de NC Audit</button> -->
+        </div>
+      </div>
+    </div>
+  
+    <!-- Suivi qualité et Satisfaction Clients -->
+   <!--  <div *ngIf="selectedTab === 'suiviQualite'" class="tab-content">
+      <div class="suivi-qualite">
+        <div class="section">
+          <h3>Plan d'action</h3>
+          <button (click)="voirPlansAction()">Voir les Plans d'action</button>
+          <button (click)="gererPlansAction()">Gestion des Plans d'action</button>
+        </div>
+  
+        <div class="section">
+          <h3>Suivi des demandes / Dérogations Client</h3>
+          <button (click)="voirDemandesClients()">Demandes clients</button>
+          <button (click)="voirDerogationsClients()">Dérogations clients</button>
+        </div>
+  
+        <div class="section">
+          <h3>Suivi réponses aux réclamations</h3>
+          <button (click)="voirReponsesReclamations()">Réponses</button>
+        </div>
+  
+        <div class="section">
+          <h3>Alerte Réclamations et Demandes Client</h3>
+          <button (click)="voirReclamations()">Réclamations</button>
+          <button (click)="voirDemandes()">Demandes</button>
+        </div>
+      </div>
+    </div> -->
+    <div *ngIf="selectedTab === 'suiviQualite'" class="tab-content">
+      <!-- Navbar pour les sous-onglets -->
+      <nav class="navbar">
+        <ul>
+          <li *ngFor="let subTab of suiviQualiteSubTabs"
+              (click)="selectSuiviQualiteSubTab(subTab.id)"
+              [class.active]="selectedSuiviQualiteSubTab === subTab.id">
+            {{ subTab.label }}
+          </li>
+        </ul>
+      </nav>
+    
+      <!-- Contenu des sous-onglets -->
+      <div class="sub-tab-content">
+        <div *ngIf="selectedSuiviQualiteSubTab === 'planAction'" class="module">
+          <h3>Plan d'action</h3>
+          <button *ngIf="voirPlansActions"(click)="voirPlansAction()">Voir les Plans d'action</button>
+          <button *ngIf="gestionPlansActions" (click)="gererPlansAction()">Gestion des Plans d'action</button>
+        </div>
+    
+        <div *ngIf="selectedSuiviQualiteSubTab === 'demandesDerogations'" class="module">
+          <h3>Suivi des demandes / Dérogations Client</h3>
+          <button *ngIf="suiviDemandesClients" (click)="voirDemandesClients()">Demandes clients</button>
+          <button *ngIf="suiviDerogationsClients" (click)="voirDerogationsClients()">Dérogations clients</button>
+        </div>
+    
+        <div *ngIf="selectedSuiviQualiteSubTab === 'reclamations'" class="module">
+          <h3>Suivi réponses aux réclamations</h3>
+          <button *ngIf="suiviReponsesAuxReclamations" (click)="voirReponsesReclamations()">Réponses</button>
+        </div>
+    
+        <div *ngIf="selectedSuiviQualiteSubTab === 'alertes'" class="module">
+          <h3>Alerte Réclamations et Demandes Client</h3>
+          <button *ngIf="alerteReclamations"(click)="voirReclamations()">Réclamations</button>
+          <button *ngIf="alerteDemandes" (click)="voirDemandes()">Demandes</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Tableau de bord -->
+    <!-- <div *ngIf="selectedTab === 'tableauBord'" class="tab-content">
+      <div class="dashboard">
+        <div class="indicators">
+          <h2>Indicateurs</h2>
+          <button class="dashboard-btn">KPI</button>
+        </div>
+        <div class="separator"></div>
+        <div class="approval">
+          <h2>Approbation</h2>
+          <button class="dashboard-btn">Approuver un rapport</button>
+          <button class="dashboard-btn">Gestion des Approbations</button>
+        </div>
+        <div class="separator"></div>
+      </div>
+    </div> -->
+  <div *ngIf="selectedTab === 'tableauBord'" class="tab-content">
+    <!-- Navbar pour les sous-onglets -->
+    <nav class="navbar">
+      <ul>
+        <li (click)="selectTableauBordSubTab('indicators')" [class.active]="selectedTableauBordSubTab === 'indicators'">
+          Indicateurs
+        </li>
+        <li (click)="selectTableauBordSubTab('approval')" [class.active]="selectedTableauBordSubTab === 'approval'">
+          Approbation
+        </li>
+      </ul>
+    </nav>
+  
+    <!-- Contenu des sous-onglets -->
+    <div class="sub-tab-content">
+      <!-- Sous-onglet "Indicateurs" -->
+      <div *ngIf="selectedTableauBordSubTab === 'indicators'" class="module">
+        <h3>Indicateurs</h3>
+        <button *ngIf="afficherKPI" (click)="voirKPI()">KPI</button>
+      </div>
+  
+      <!-- Sous-onglet "Approbation" -->
+      <div *ngIf="selectedTableauBordSubTab === 'approval'" class="module">
+        <h3>Approbation</h3>
+        <button *ngIf="approuverRapports" (click)="approuverRapport()">Approuver un rapport</button>
+        <button *ngIf="gestionApprobation" (click)="gestionApprobations()">Gestion des Approbations</button>
+      </div>
+    </div>
+  </div>
+  
+    <!-- Rapport 8D ou NC -->
+   <!--  <div *ngIf="showRapport8D || showRapportNC  || showRapportSignalisation ||afficherRapportNcInterne ||afficherRapportAudit" class="rapport-8d">
+      <router-outlet></router-outlet>
+    </div>
+  </div> -->
+  <div *ngIf="selectedTab === 'parametrage'" class="tab-content">
+    <!-- Navbar pour les sous-onglets -->
+    <nav class="navbar">
+      <ul>
+        <li (click)="selectSubTab('cablages')" [class.active]="selectedSubTab === 'cablages'">cablages</li>
+        <li (click)="selectSubTab('clients')" [class.active]="selectedSubTab === 'clients'"> clients</li>
+        <li (click)="selectSubTab('articles')" [class.active]="selectedSubTab === 'articles'">articles</li>
+        <li (click)="selectSubTab('defauts')" [class.active]="selectedSubTab === 'defauts'">defauts</li>
+        <li (click)="selectSubTab('operateurs')" [class.active]="selectedSubTab === 'operateurs'">operateurs</li>
+        <li (click)="selectSubTab('commandes')" [class.active]="selectedSubTab === 'commandes'">commandes</li>
+      </ul>
+    </nav>
+  <div *ngIf="selectedRapport" class="rapport-8d">
+    <router-outlet></router-outlet>
+    
+  </div>
+

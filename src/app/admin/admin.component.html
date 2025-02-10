@@ -1,0 +1,355 @@
+<div *ngIf="currentUserRoles.includes('ROLE_ADMIN')">
+  <nav>
+    <ul>
+      <li>
+        <a href="#" (click)="showUsersList = false; showCreateUser = true; showUserSettings = false; $event.preventDefault()">Créer un utilisateur</a>
+      </li>
+      <li>
+        <a href="#" (click)="showUsersList = true; showCreateUser = false; showUserSettings = false; $event.preventDefault()">Liste des utilisateurs</a>
+      </li>
+      <li>
+        <a href="#" (click)="showUsersList = false; showCreateUser = false; showUserSettings = true; $event.preventDefault()">Paramètrage des utilisateurs</a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Section "paramètrage des utilisateurs" -->
+  <div *ngIf="showUserSettings">
+    <h2>Paramètrage des utilisateurs</h2>
+    <ul class="users">
+      <li class="users" *ngFor="let user of users">
+        {{ user.username }}
+        <button (click)="openPermissionsModal(user)">Paramétrer les permissions</button>
+        <button (click)="openEditUserModal(user)">Modifier l'utilisateur</button>
+      </li>
+    </ul>
+  </div>
+  
+  <!-- Modal pour modifier l'utilisateur -->
+<div class="modal" *ngIf="showEditUserModal">
+  <div class="modal-content">
+    <h3>Modifier les informations de {{ selectedUser?.username }}</h3>
+
+    <!-- Contenu du formulaire de modification -->
+    <div>
+      <label for="newUsername">Nouveau Nom d'utilisateur</label>
+      <input type="text" id="newUsername" [(ngModel)]="selectedUser!.newUsername" />
+    </div>
+    <div>
+      <label for="newPassword">Nouveau Mot de passe</label>
+      <input type="password" id="newPassword" [(ngModel)]="selectedUser!.newPassword" />
+    </div>
+
+    <!-- Actions du modal -->
+    <div class="modal-actions">
+      <button (click)="submitEditUser()">Soumettre</button>
+      <button (click)="closeEditUserModal()">Annuler</button>
+    </div>
+  </div>
+</div>
+<!-- Modal pour paramétrer les permissions -->
+<div class="modal" *ngIf="showPermissionsModal">
+  <div class="modal-content">
+    <h3>Paramétrer les permissions pour {{ selectedUser?.username }}</h3>
+
+    <!-- Conteneur pour les permissions avec défilement -->
+    <div class="permissions-container">
+
+      <!-- Gestion des rapports NC -->
+      <h4>Traitement des NC</h4>
+      <div>
+        <label>
+          <input type="checkbox" [(ngModel)]="selectedUser!.creerRapportNc" />
+          Créer Rapport NC
+        </label>
+      </div>
+      <div>
+        <label>
+          <input type="checkbox" [(ngModel)]="selectedUser!.ouvrirRapportNc" />
+          Ouvrir Rapport NC
+        </label>
+      </div>
+      <div>
+        <label>
+          <input type="checkbox" [(ngModel)]="selectedUser!.modifierRapportNc" />
+          Modifier Rapport NC
+        </label>
+      </div>
+      <div>
+        <label>
+          <input type="checkbox" [(ngModel)]="selectedUser!.supprimerRapportNc" />
+          Supprimer Rapport NC
+        </label>
+      </div>
+
+      <!-- Gestion des rapports 8D -->
+      <h4>Gestion des rapports 8D</h4>
+      <div>
+        <label>
+          <input type="checkbox" [(ngModel)]="selectedUser!.creerRapport8d" />
+          Créer Rapport 8D
+        </label>
+      </div>
+      <div>
+        <label>
+          <input type="checkbox" [(ngModel)]="selectedUser!.ouvrirRapport8d" />
+          Ouvrir Rapport 8D
+        </label>
+      </div>
+      <div>
+        <label>
+          <input type="checkbox" [(ngModel)]="selectedUser!.modifierRapport8d" />
+          Modifier Rapport 8D
+        </label>
+      </div>
+      <div>
+        <label>
+          <input type="checkbox" [(ngModel)]="selectedUser!.supprimerRapport8d" />
+          Supprimer Rapport 8D
+        </label>
+      </div>
+
+      <!-- Gestion des rapports de signalisation -->
+      <h4>Gestion des rapports de signalisation</h4>
+      <div>
+        <label>
+          <input type="checkbox" [(ngModel)]="selectedUser!.creerRapportSignalisation" />
+          Créer Rapport Signalisation
+        </label>
+      </div>
+      <div>
+        <label>
+          <input type="checkbox" [(ngModel)]="selectedUser!.ouvrirRapportSignalisation" />
+          Ouvrir Rapport Signalisation
+        </label>
+      </div>
+      <div>
+        <label>
+          <input type="checkbox" [(ngModel)]="selectedUser!.modifierRapportSignalisation" />
+          Modifier Rapport Signalisation
+        </label>
+      </div>
+      <div>
+        <label>
+          <input type="checkbox" [(ngModel)]="selectedUser!.supprimerRapportSignalisation" />
+          Supprimer Rapport Signalisation
+        </label>
+      </div>
+
+      <!-- Gestion des rapports internes -->
+      <h4>Gestion des rapports internes</h4>
+      <div>
+        <label>
+          <input type="checkbox" [(ngModel)]="selectedUser!.creerRapportNcInterne" />
+          Créer Rapport Interne
+        </label>
+      </div>
+      <div>
+        <label>
+          <input type="checkbox" [(ngModel)]="selectedUser!.ouvrirRapportInterne" />
+          Ouvrir Rapport Interne
+        </label>
+      </div>
+      <div>
+        <label>
+          <input type="checkbox" [(ngModel)]="selectedUser!.modifierRapportInterne" />
+          Modifier Rapport Interne
+        </label>
+      </div>
+      <div>
+        <label>
+          <input type="checkbox" [(ngModel)]="selectedUser!.supprimerRapportInterne" />
+          Supprimer Rapport Interne
+        </label>
+      </div>
+
+      <!-- Gestion des rapports d'audit -->
+      <h4>Gestion des rapports d'audit</h4>
+      <div>
+        <label>
+          <input type="checkbox" [(ngModel)]="selectedUser!.creerRapportNcAudit" />
+          Créer Rapport NC Audit
+        </label>
+      </div>
+      <div>
+        <label>
+          <input type="checkbox" [(ngModel)]="selectedUser!.ouvrirRapportNcAudit" />
+          Ouvrir Rapport NC Audit
+        </label>
+      </div>
+      <div>
+        <label>
+          <input type="checkbox" [(ngModel)]="selectedUser!.modifierRapportNcAudit" />
+          Modifier Rapport NC Audit
+        </label>
+      </div>
+      <div>
+        <label>
+          <input type="checkbox" [(ngModel)]="selectedUser!.supprimerRapportNcAudit" />
+          Supprimer Rapport NC Audit
+        </label>
+      </div>
+
+      <!-- Suivi qualité et satisfaction clients -->
+      <h4>Suivi qualité et satisfaction clients</h4>
+      <div>
+        <label>
+          <input type="checkbox" [(ngModel)]="selectedUser!.voirPlansActions" />
+          Voir Plans Actions
+        </label>
+      </div>
+      <div>
+        <label>
+          <input type="checkbox" [(ngModel)]="selectedUser!.gestionPlansActions" />
+          Gestion Plans Actions
+        </label>
+      </div>
+      <div>
+        <label>
+          <input type="checkbox" [(ngModel)]="selectedUser!.suiviDemandesClients" />
+          Suivi Demandes Clients
+        </label>
+      </div>
+      <div>
+        <label>
+          <input type="checkbox" [(ngModel)]="selectedUser!.suiviDerogationsClients" />
+          Suivi Dérogations Clients
+        </label>
+      </div>
+      <div>
+        <label>
+          <input type="checkbox" [(ngModel)]="selectedUser!.suiviReponsesAuxReclamations" />
+          Suivi Réponses Aux Réclamations
+        </label>
+      </div>
+      <div>
+        <label>
+          <input type="checkbox" [(ngModel)]="selectedUser!.alerteReclamations" />
+          Alerte Réclamations
+        </label>
+      </div>
+      <div>
+        <label>
+          <input type="checkbox" [(ngModel)]="selectedUser!.alerteDemandes" />
+          Alerte Demandes
+        </label>
+      </div>
+
+      <!-- Tableau de bord et approbation -->
+      <h4>Tableau de bord et approbation</h4>
+      <div>
+        <label>
+          <input type="checkbox" [(ngModel)]="selectedUser!.afficherKPI" />
+          Afficher KPI
+        </label>
+      </div>
+      <div>
+        <label>
+          <input type="checkbox" [(ngModel)]="selectedUser!.approuverRapport" />
+          Approuver Rapport
+        </label>
+      </div>
+      <div>
+        <label>
+          <input type="checkbox" [(ngModel)]="selectedUser!.gestionApprobations" />
+          Gestion Approbations
+        </label>
+      </div>
+
+      <!-- Paramétrage -->
+      <h4>Paramétrage</h4>
+      <div>
+        <label>
+          <input type="checkbox" [(ngModel)]="selectedUser!.gestionUtilisateurs" />
+          Gestion Utilisateurs
+        </label>
+      </div>
+
+    </div>
+
+    <!-- Actions du modal -->
+    <div class="modal-actions">
+      <button (click)="submitPermissions()">Soumettre</button>
+      <button (click)="closePermissionsModal()">Annuler</button>
+    </div>
+  </div>
+</div>
+
+
+
+  
+        <!-- creation des utilisateurs -->
+        <div class="form-container" *ngIf="showCreateUser">
+            <h2>Création d'utilisateur</h2>
+          
+            <!-- Formulaire -->
+            <form (ngSubmit)="createAndApproveUser()">
+                <div>
+                  <label for="username">Nom d'utilisateur :</label>
+                  <input
+                    id="username"
+                    type="text"
+                    [(ngModel)]="newUser.username"
+                    name="username"
+                    required
+                  />
+                </div>
+                
+                <div>
+                  <label for="password">Mot de passe :</label>
+                  <input
+                    id="password"
+                    type="password"
+                    [(ngModel)]="newUser.password"
+                    name="password"
+                    required
+                  />
+                </div>
+              
+                <div>
+                  <label for="roles">Rôle :</label>
+                  <select
+                    id="roles"
+                    [(ngModel)]="selectedRoleId"
+                    name="roles"
+                    required
+                  >
+                    <option *ngFor="let role of roles" [value]="role.id">{{ role.name }}</option>
+                  </select>
+                </div>
+              
+                <button type="submit">Créer l'utilisateur</button>
+              </form>
+          
+            <!-- Message de retour -->
+            <div *ngIf="message" class="alert" [ngClass]="message.includes('succès') ? 'alert-success' : 'alert-danger'">
+              {{ message }}
+            </div>
+          </div>
+<!-- liste des utilisateurs -->
+<div *ngIf="showUsersList">
+<div *ngFor="let user of users">
+    <div>{{ user.username }} ({{ user.approved ? 'Approved' : 'Not Approved' }})</div>
+    
+    <!-- Liaison avec la propriété selectedRole de chaque utilisateur -->
+    <select [(ngModel)]="user.selectedRole">
+      <option *ngFor="let role of roles" [value]="role.id">{{ role.name }}</option>
+    </select>
+    <label>les roles associés</label>
+    <div *ngFor="let role of user.roles"> 
+   
+        {{role.name}}
+    </div>
+    <!-- Désactivation du bouton si l'utilisateur ou le rôle n'est pas sélectionné -->
+    <button
+      [disabled]="!user.id || user.selectedRole === null"
+      (click)="approveUser(user.id, user.selectedRole)"
+    >
+      valider et affecter un Role
+    </button>
+  </div>
+</div>
+
+
+  <!--  -->
+</div>

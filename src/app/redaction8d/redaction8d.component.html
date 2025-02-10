@@ -1,0 +1,101 @@
+<div class="modal-overlay" *ngIf="isModalOpen">
+    <div class="modal">
+      <!-- En-tête du modal -->
+      <div class="modal-header">
+        <h2>Rédaction du Rapport 8D</h2>
+        <button class="close-btn" (click)="closeModal()">✖</button>
+      </div>
+  
+      <!-- Contenu du modal -->
+      <div class="modal-content">
+        <div class="rapport-container">
+          <!-- Section : Identifier le problème -->
+          <div class="section">
+            <h3>Identifier le problème et les différents acteurs</h3>
+            <label>Identifié par :
+              <select [(ngModel)]="rapport.identifiePar">
+                <option value="ESAM">ESAM</option>
+                <!-- Ajouter d'autres options si nécessaire -->
+              </select>
+            </label>
+  
+            <label>Code Cable :
+              <select [(ngModel)]="rapport.codeCable">
+                <option value="ATS4">ATS4</option>
+                <!-- Ajouter d'autres options -->
+              </select>
+            </label>
+  
+            <label>Qt Totale :
+              <input type="number" [(ngModel)]="rapport.qtTotale" />
+            </label>
+  
+            <label>Date d'ouverture :
+              <input type="date" [(ngModel)]="rapport.dateOuverture" />
+            </label>
+          </div>
+  
+          <!-- Section : Construire l'équipe -->
+          <div class="section">
+            <h3>1 - Construire l'équipe</h3>
+            <label>Pilote :
+              <select [(ngModel)]="rapport.pilote">
+                <option>Med Amine Manasser</option>
+                <!-- Ajouter d'autres options -->
+              </select>
+            </label>
+  
+            <label>Équipe :
+              <textarea [(ngModel)]="rapport.equipe" placeholder="Liste des membres"></textarea>
+            </label>
+          </div>
+  
+          <!-- Section : Décrire le problème -->
+          <div class="section">
+            <h3>2 - Décrire le problème</h3>
+            <label>Description NC :
+              <textarea [(ngModel)]="rapport.descriptionNC"></textarea>
+            </label>
+  
+            <label>Codes Défauts :
+              <select [(ngModel)]="rapport.codesDefauts" multiple>
+                <option value="HA04">HA04</option>
+                <option value="TU03">TU03</option>
+                <!-- Ajouter d'autres options -->
+              </select>
+            </label>
+          </div>
+  
+          <!-- Section : Action immédiate -->
+          <div class="section">
+            <h3>3 - Action immédiate</h3>
+            <label>Action immédiate :
+              <textarea [(ngModel)]="rapport.actionImmediat"></textarea>
+            </label>
+  
+            <label>Responsable :
+              <select [(ngModel)]="rapport.responsable">
+                <option>Med Amine Manasser</option>
+                <!-- Ajouter d'autres options -->
+              </select>
+            </label>
+  
+            <label>Réalisé :
+              <input type="checkbox" [(ngModel)]="rapport.realise" />
+            </label>
+  
+            <label>Production en cours :
+              <input type="checkbox" [(ngModel)]="rapport.productionEnCours" />
+            </label>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Pied de page du modal -->
+      <div class="modal-footer">
+        <button class="save-btn" (click)="saveRapport()">Enregistrer</button>
+        <button class="cancel-btn" (click)="closeModal()">Annuler</button>
+      </div>
+    </div>
+  </div>
+  
